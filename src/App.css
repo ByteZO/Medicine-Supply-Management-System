@@ -1,42 +1,62 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* App.css */
+
+.bg-gradient-to-r {
+  background: linear-gradient(to right, #3b82f6, #60a5fa); /* Custom gradient */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.text-shadow-lg {
+  text-shadow: 
+    2px 2px 0 rgba(0, 0, 0, 0.3),
+    4px 4px 0 rgba(0, 0, 0, 0.2),
+    6px 6px 0 rgba(0, 0, 0, 0.1);
 }
 
-@keyframes logo-spin {
+.relative {
+  position: relative;
+}
+
+.block {
+  display: block; /* Ensure it takes up space */
+}
+
+/* Animation for sliding in */
+@keyframes slideIn {
   from {
-    transform: rotate(0deg);
+    transform: translateY(30px); /* Start 30px below */
+    opacity: 0; /* Start invisible */
   }
   to {
-    transform: rotate(360deg);
+    transform: translateY(0); /* End at the original position */
+    opacity: 1; /* End visible */
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* Apply the animation when visible */
+.slide-in {
+  animation: slideIn 1s ease-out forwards; /* Animation name, duration, and easing */
+}
+
+/* Optional animation on the text for more dynamism */
+@keyframes textAnimation {
+  0% {
+    transform: translateZ(0);
+  }
+  50% {
+    transform: translateZ(10px);
+  }
+  100% {
+    transform: translateZ(0);
   }
 }
 
-.card {
-  padding: 2em;
+h2 {
+  animation: textAnimation 1s ease-in-out infinite alternate;
+}/* App.css */
+
+/* General styles */
+.bg-gradient-to-r {
+  background: linear-gradient(to right, #3b82f6, #60a5fa);
 }
 
-.read-the-docs {
-  color: #888;
-}
+/* Other styles can be added as needed */
+
