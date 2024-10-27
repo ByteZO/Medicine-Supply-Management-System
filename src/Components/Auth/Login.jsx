@@ -7,7 +7,7 @@ function Login() {
     <>
       <nav className="bg-white shadow-md py-4 px-8 flex justify-between items-center ">
         <h1
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/admin/home")}
           style={{ cursor: "pointer" }}
           className="text-2xl font-bold text-blue-600"
         >
@@ -54,7 +54,7 @@ function Login() {
             <button
               className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
               type="button"
-              onClick={() => navigate("/admin")}
+              onClick={() => navigate("/admin/home")}
             >
               Login
             </button>
