@@ -37,7 +37,7 @@ function AdminHero() {
   };
 
   return (
-    <div className="p-8 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg shadow-lg space-y-6">
+    <div className="p-8 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg shadow-lg space-y-6 m-7">
       {/* Welcome Section */}
       <div className="flex justify-between items-center mb-8">
         <div>
