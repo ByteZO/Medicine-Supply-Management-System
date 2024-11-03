@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import '../../App.css'; // Ensure you have your styles imported
 
 function Login() {
   const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(false); // State for controlling fade-in
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true); // Set to true after a delay
+    }, 500); // Delay in milliseconds before fade-in starts
+
+    return () => clearTimeout(timer); // Cleanup on unmount
+  }, []);
+
   return (
     <>
-      <nav className="bg-white shadow-md py-4 px-8 flex justify-between items-center ">
+      <nav className="bg-white shadow-md py-4 px-8 flex justify-between items-center rounded-b-lg transition-transform transform">
         <h1
           onClick={() => navigate("/admin/home")}
           style={{ cursor: "pointer" }}
@@ -14,9 +25,13 @@ function Login() {
           MedManage
         </h1>
       </nav>
-      <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center">
-        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md">
-          <h2 className="text-2xl font-semibold text-center text-blue-600 mb-6">
+      <div className="bg-gradient-to-r from-blue-400 to-blue-600 min-h-screen flex flex-col items-center justify-center">
+        <div
+          className={`bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md transition-opacity duration-1000 ease-in ${
+            isVisible ? "opacity-100" : "opacity-0"
+          } transform ${isVisible ? "translate-y-0" : "translate-y-10"}`}
+        >
+          <h2 className="text-2xl font-bold text-center text-gray-600 mb-6">
             Login to MedManage
           </h2>
 
@@ -52,7 +67,7 @@ function Login() {
             </div>
 
             <button
-              className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+              className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline transition duration-300 transform hover:translate-y-1"
               type="button"
               onClick={() => navigate("/admin/home")}
             >

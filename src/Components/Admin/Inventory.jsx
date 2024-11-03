@@ -42,15 +42,15 @@ const Inventory = () => {
   });
 
   return (
-    <div className="h-90 flex flex-col items-start px-8 py-6 bg-gray-100">
+    <div className="h-screen flex flex-col items-start px-8 py-6 bg-gray-900">
       <div className="flex items-center justify-between w-full mb-6">
-        <h1 className="text-3xl font-semibold text-blue-600">Inventory</h1>
+        <h1 className="text-3xl font-semibold text-gray-200">Inventory</h1>
 
         {/* Filter Dropdown */}
         <div className="flex items-center space-x-4">
-          <label className="text-gray-700 font-medium">Filter:</label>
+          <label className="text-gray-300 font-medium">Filter:</label>
           <select
-            className="border border-gray-300 rounded px-3 py-1 focus:outline-none focus:border-blue-600"
+            className="border border-gray-600 rounded px-3 py-1 bg-gray-800 text-gray-300 focus:outline-none focus:border-blue-600"
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
           >
@@ -61,31 +61,29 @@ const Inventory = () => {
       </div>
 
       {/* Medicine Table */}
-      <div className="w-full bg-white shadow-md rounded-lg overflow-hidden">
-        <table className="min-w-full bg-white">
-          <thead>
+      <div className="w-full bg-gray-800 shadow-md rounded-md overflow-hidden">
+        <table className="min-w-full bg-gray-900">
+          <thead className="bg-gray-800">
             <tr>
-              <th className="py-3 px-4 text-left text-gray-600">Name</th>
-              <th className="py-3 px-4 text-left text-gray-600">
-                Manufacturer
-              </th>
-              <th className="py-3 px-4 text-left text-gray-600">Dosage</th>
-              <th className="py-3 px-4 text-left text-gray-600">Quantity</th>
-              <th className="py-3 px-4 text-left text-gray-600">Price</th>
-              <th className="py-3 px-4 text-left text-gray-600">Discount</th>
-              <th className="py-3 px-4 text-left text-gray-600">Expiry Date</th>
+              <th className="py-3 px-4 text-left text-gray-300">Name</th>
+              <th className="py-3 px-4 text-left text-gray-300">Manufacturer</th>
+              <th className="py-3 px-4 text-left text-gray-300">Dosage</th>
+              <th className="py-3 px-4 text-left text-gray-300">Quantity</th>
+              <th className="py-3 px-4 text-left text-gray-300">Price</th>
+              <th className="py-3 px-4 text-left text-gray-300">Discount</th>
+              <th className="py-3 px-4 text-left text-gray-300">Expiry Date</th>
             </tr>
           </thead>
           <tbody>
             {filteredMedicines.map((medicine) => (
-              <tr key={medicine.id} className="border-b hover:bg-gray-50">
-                <td className="py-3 px-4">{medicine.name}</td>
-                <td className="py-3 px-4">{medicine.manufacturer}</td>
-                <td className="py-3 px-4">{medicine.dosage}</td>
-                <td className="py-3 px-4">{medicine.quantity}</td>
-                <td className="py-3 px-4">${medicine.price.toFixed(2)}</td>
-                <td className="py-3 px-4">{medicine.discount}%</td>
-                <td className="py-3 px-4">
+              <tr key={medicine.id} className="border-b border-gray-700 hover:bg-gray-800">
+                <td className="py-3 px-4 text-gray-300">{medicine.name}</td>
+                <td className="py-3 px-4 text-gray-300">{medicine.manufacturer}</td>
+                <td className="py-3 px-4 text-gray-300">{medicine.dosage}</td>
+                <td className="py-3 px-4 text-gray-300">{medicine.quantity}</td>
+                <td className="py-3 px-4 text-gray-300">${medicine.price.toFixed(2)}</td>
+                <td className="py-3 px-4 text-gray-300">{medicine.discount}%</td>
+                <td className="py-3 px-4 text-gray-300">
                   {new Date(medicine.expiryDate).toLocaleDateString()}
                 </td>
               </tr>
@@ -95,6 +93,7 @@ const Inventory = () => {
       </div>
     </div>
   );
+
 };
 
 export default Inventory;
