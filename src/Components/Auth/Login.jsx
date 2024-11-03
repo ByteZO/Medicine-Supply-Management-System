@@ -9,11 +9,7 @@ function Login() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true); // Set to true after a delay
-<<<<<<< HEAD
-    }, 500); // Delay in milliseconds before fade-in starts
-=======
     }, 25); // Delay in milliseconds before fade-in starts
->>>>>>> 7beee555bfa78bf442429e047e88554517baa600
 
     return () => clearTimeout(timer); // Cleanup on unmount
   }, []);

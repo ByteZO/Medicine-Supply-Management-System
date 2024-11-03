@@ -21,11 +21,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
-<<<<<<< HEAD
-    "socket.io-client": "^4.8.1"
-=======
     "react-spring": "^9.7.4"
->>>>>>> 7beee555bfa78bf442429e047e88554517baa600
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
