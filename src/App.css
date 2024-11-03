@@ -60,3 +60,9 @@ h2 {
 
 /* Other styles can be added as needed */
 
+.custom-date-input::-webkit-calendar-picker-indicator {
+  filter: invert(1) brightness(2);
+}
+
+
+

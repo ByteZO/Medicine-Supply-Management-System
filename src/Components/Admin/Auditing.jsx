@@ -1,7 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
+import '../../App.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 
-const API_URL = import.meta.env.BACKEND_API_URL || "http://localhost:8080/api/medicines"; // Default API URL
+const API_URL = import.meta.env.BACKEND_API_URL || "http://localhost:8080/api/medicines";
 
 function Auditing() {
   const [medicineData, setMedicineData] = useState({
@@ -52,24 +55,24 @@ function Auditing() {
   };
 
   return (
-    <div className="bg-gray-100 h-[90vh] flex items-center justify-center">
+    <div className={`bg-gray-900 h-[89vh] flex items-center justify-center `}>
       {isSubmitted && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-lg text-center">
-            <h2 className="text-3xl font-bold text-blue-600 mb-4">Success!</h2>
-            <p className="text-lg mb-6">Medicine added successfully.</p>
+        <div className="fixed inset-0 flex items-center justify-center z-50 ">
+          <div className="bg-blue-600 rounded-3xl shadow-lg p-8 w-full max-w-lg text-center">
+            <h2 className="text-4xl font-bold text-gray-200 mb-4">Success!</h2>
+            <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#46c34e", fontSize: '6rem', paddingBlock: '12px'}} />
+            <p className="text-2xl font-medium mb-3 mt-3 text-gray-200">Medicine added successfully.</p>
           </div>
         </div>
       )}
 
-      <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 w-full max-w-2xl h-[80%] overflow-auto">
-        <h2 className="text-2xl font-semibold text-center text-blue-600 mb-6">
+      <div className={`bg-gray-900  px-8 pt-6 pb-8 w-full max-w-6xl h-[75%] overflow-auto ${isSubmitted ? "blur-md" : ""}`}>
+        <h2 className="text-3xl font-semibold text-center text-gray-200 mb-6">
           Add Medicine for Auditing
         </h2>
 
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-2 gap-4">
-            {/* Medicine Details */}
+          <div className="grid grid-cols-3 gap-4">
             <InputField
               label="Name"
               name="name"
@@ -120,6 +123,7 @@ function Auditing() {
               label="Expiry Date"
               name="expiryDate"
               type="date"
+              className="custom-date-input"
               value={medicineData.expiryDate}
               onChange={handleChange}
             />
@@ -127,7 +131,7 @@ function Auditing() {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 mt-6"
+            className="w-full bg-gray-600 text-gray-200 font-bold py-2 px-4 rounded duration-200 hover:bg-blue-700 mt-6"
           >
             Submit
           </button>
@@ -139,15 +143,15 @@ function Auditing() {
 
 import PropTypes from "prop-types";
 
-function InputField({ label, name, value, onChange, type = "text", step }) {
+function InputField({ label, name, value, onChange, type = "text", step ,className }) {
   return (
     <div className="mb-4">
       <label
-        className="block text-gray-700 text-sm font-bold mb-2"
+        className="block text-gray-200 text-sm font-bold mb-2"
         htmlFor={name}
       >
         {label}
-      </label>
+      </label>  
       <input
         type={type}
         step={step}
@@ -155,7 +159,7 @@ function InputField({ label, name, value, onChange, type = "text", step }) {
         name={name}
         value={value}
         onChange={onChange}
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+        className={`shadow shadow-gray-500 appearance-none border rounded w-full py-2 px-3 text-gray-200 bg-gray-900 border-gray-400 ${className || ''}`}
         required
       />
     </div>
@@ -168,6 +172,7 @@ InputField.propTypes = {
   onChange: PropTypes.func.isRequired,
   type: PropTypes.string,
   step: PropTypes.string,
+  className: PropTypes.string, 
 };
 
 export default Auditing;
