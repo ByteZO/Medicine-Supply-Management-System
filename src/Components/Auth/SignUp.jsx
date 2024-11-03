@@ -9,7 +9,7 @@ function SignUp() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true); // Set to true after a delay
-    }, 200); // Delay in milliseconds before fade-in starts
+    }, 25); // Delay in milliseconds before fade-in starts
 
     return () => clearTimeout(timer); // Cleanup on unmount
   }, []);
