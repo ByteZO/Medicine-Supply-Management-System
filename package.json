@@ -7,15 +7,25 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "preinstall": "npx npm-force-resolutions"
   },
   "dependencies": {
+    "@fortawesome/free-regular-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "axios": "^1.7.7",
+    "chart.js": "^4.4.5",
     "jspdf": "^2.5.2",
     "react": "^18.3.1",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
+<<<<<<< HEAD
     "socket.io-client": "^4.8.1"
+=======
+    "react-spring": "^9.7.4"
+>>>>>>> 7beee555bfa78bf442429e047e88554517baa600
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
@@ -30,6 +40,7 @@
     "globals": "^15.11.0",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",
-    "vite": "^5.4.9"
+    "vite": "^5.4.9",
+    "react-error-overlay": "6.0.9"  
   }
 }

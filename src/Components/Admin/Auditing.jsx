@@ -15,10 +15,14 @@ function Auditing() {
     quantity: "",
     price: "",
     discount: "",
-    expiryDate: "",
+    expiryDate: "", // Single expiry date field for API
   });
 
+<<<<<<< HEAD
   const [isSubmitted, setIsSubmitted] = useState(false);
+=======
+  const [isSubmitted, setIsSubmitted] = useState(false); // Track submission status
+>>>>>>> 7beee555bfa78bf442429e047e88554517baa600
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,12 +32,22 @@ function Auditing() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+<<<<<<< HEAD
       console.log("Submitting Data:", medicineData);
 
       const response = await axios.post(API_URL, medicineData);
       console.log("Response:", response.data);
 
       setIsSubmitted(true);
+=======
+      // Log the request payload to verify
+      console.log("Submitting Data:", medicineData);
+
+      const response = await axios.post(API_URL, medicineData);
+      console.log("Response:", response.data); // Log response from API
+
+      setIsSubmitted(true); // Show success card
+>>>>>>> 7beee555bfa78bf442429e047e88554517baa600
       setMedicineData({
         name: "",
         manufacturer: "",
@@ -42,7 +56,7 @@ function Auditing() {
         quantity: "",
         price: "",
         discount: "",
-        expiryDate: "",
+        expiryDate: "", // Reset after submission
       });
 
       setTimeout(() => {
@@ -165,7 +179,10 @@ function InputField({ label, name, value, onChange, type = "text", step ,classNa
     </div>
   );
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7beee555bfa78bf442429e047e88554517baa600
 InputField.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,

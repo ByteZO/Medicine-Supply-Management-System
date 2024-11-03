@@ -1,45 +1,32 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+
+const API_URL =
+  import.meta.env.BACKEND_API_URL || "http://localhost:8080/api/medicines";
 
 const Inventory = () => {
   const [medicines, setMedicines] = useState([]);
-  const [filter, setFilter] = useState("All"); // Default to show all medicines
+  const [filter, setFilter] = useState("All"); // Default filter to show all medicines
 
+  // Function to fetch medicines based on the selected filter
+  const fetchMedicines = async (filter) => {
+    try {
+      const url = filter === "All" ? API_URL : `${API_URL}/expired`;
+      console.log(`Calling API: ${url}`); // Log API call for debugging
+      const response = await axios.get(url);
+      console.log("API Response:", response.data); // Log response for debugging
+      setMedicines(response.data);
+    } catch (error) {
+      setMedicines([]);
+      alert("Something went wrong. Please try again later.");
+      console.error("Error fetching medicines:", error);
+    }
+  };
+
+  // Fetch data initially and whenever the filter changes
   useEffect(() => {
-    // Fetch data from the backend
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("/api/medicines"); // Adjust URL to match backend endpoint
-        setMedicines([
-          {
-            createdDate: "2024-10-26T17:13:36",
-            lastModifiedDate: "2024-10-26T17:13:36",
-            id: 1,
-            name: "Aspirin",
-            manufacturer: "Pharma Co",
-            genericName: "Acetylsalicylic Acid",
-            dosage: "500mg",
-            quantity: 100,
-            price: 5.99,
-            discount: 10,
-            expiryDate: "2025-06-01",
-          },
-        ]);
-      } catch (error) {
-        setMedicines([]);
-        alert("Something went wrong . Please try again later.");
-        console.error("Error fetching medicines:", error);
-      }
-    };
-    fetchData();
-  }, []);
-
-  // Filter function to show either all medicines or only expired ones
-  const filteredMedicines = medicines.filter((medicine) => {
-    if (filter === "All") return true;
-    if (filter === "Expired") return new Date(medicine.expiryDate) < new Date();
-    return false;
-  });
+    fetchMedicines(filter);
+  }, [filter]); // Dependency array includes 'filter' to re-trigger API calls
 
   return (
     <div className="h-screen flex flex-col items-start px-8 py-6 bg-gray-900">
@@ -75,7 +62,11 @@ const Inventory = () => {
             </tr>
           </thead>
           <tbody>
+<<<<<<< HEAD
             {filteredMedicines.map((medicine) => (
+=======
+            {medicines.map((medicine) => (
+>>>>>>> 7beee555bfa78bf442429e047e88554517baa600
               <tr key={medicine.id} className="border-b border-gray-700 hover:bg-gray-800">
                 <td className="py-3 px-4 text-gray-300">{medicine.name}</td>
                 <td className="py-3 px-4 text-gray-300">{medicine.manufacturer}</td>
