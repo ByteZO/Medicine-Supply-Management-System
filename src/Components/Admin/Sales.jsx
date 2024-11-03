@@ -111,27 +111,27 @@ const Sales = () => {
   };
 
   return (
-    <div className="flex flex-col h-[90vh] p-4 bg-gray-100">
-      <h1 className="text-3xl font-bold text-blue-600 mb-6">Sales Report</h1>
-      <div className="overflow-x-auto bg-white shadow-md rounded-lg">
-        <table className="min-w-full">
-          <thead className="bg-blue-600 text-white">
+    <div className="h-screen flex flex-col items-start px-8 py-6 bg-gray-900">
+      <h1 className="text-3xl font-semibold text-gray-200 mb-6">Sales Report</h1>
+      <div className="overflow-x-auto w-full bg-gray-800 shadow-md rounded-md">
+        <table className="min-w-full bg-gray-900">
+          <thead className="bg-gray-800">
             <tr>
-              <th className="py-3 px-4 text-left">ID</th>
-              <th className="py-3 px-4 text-left">Medicine</th>
-              <th className="py-3 px-4 text-left">Quantity</th>
-              <th className="py-3 px-4 text-left">Price</th>
-              <th className="py-3 px-4 text-left">Sale Date</th>
+              <th className="py-3 px-4 text-left text-gray-300">ID</th>
+              <th className="py-3 px-4 text-left text-gray-300">Medicine</th>
+              <th className="py-3 px-4 text-left text-gray-300">Quantity</th>
+              <th className="py-3 px-4 text-left text-gray-300">Price</th>
+              <th className="py-3 px-4 text-left text-gray-300">Sale Date</th>
             </tr>
           </thead>
           <tbody>
             {salesData.map((sale) => (
-              <tr key={sale.id} className="hover:bg-gray-100">
-                <td className="py-3 px-4 border-b">{sale.id}</td>
-                <td className="py-3 px-4 border-b">{sale.name}</td>
-                <td className="py-3 px-4 border-b">{sale.quantity}</td>
-                <td className="py-3 px-4 border-b">${sale.price.toFixed(2)}</td>
-                <td className="py-3 px-4 border-b">
+              <tr key={sale.id} className="border-b border-gray-700 hover:bg-gray-800">
+                <td className="py-3 px-4 text-gray-300">{sale.id}</td>
+                <td className="py-3 px-4 text-gray-300">{sale.name}</td>
+                <td className="py-3 px-4 text-gray-300">{sale.quantity}</td>
+                <td className="py-3 px-4 text-gray-300">${sale.price.toFixed(2)}</td>
+                <td className="py-3 px-4 text-gray-300">
                   {new Date(sale.saleDate).toLocaleString()}
                 </td>
               </tr>
@@ -150,3 +150,4 @@ const Sales = () => {
 };
 
 export default Sales;
+  

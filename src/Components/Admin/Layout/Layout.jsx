@@ -70,7 +70,7 @@ function Layout() {
           </div>
         </div>
       </nav>
-      <div className=" bg-gray-100 max-h-screen">
+      <div className=" bg-gray-900 max-h-screen">
         <Outlet />
       </div>
     </>
