@@ -7,7 +7,6 @@ function Layout() {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    localStorage.setItem("userName", "John Doe");
     const storedUserName = localStorage.getItem("userName");
     if (storedUserName) {
       setUserName(storedUserName);
