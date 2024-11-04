@@ -66,7 +66,8 @@ const Inventory = () => {
           expiryDate: "2024-12-31",
         },
       ];
-      await axios.post(API_URL, mockMedicines);
+      // await axios.post(API_URL, mockMedicines);q
+      <q></q>
       setMedicines(mockMedicines);
       applyFilters(mockMedicines, searchQuery);
     } catch (error) {
