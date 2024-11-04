@@ -112,7 +112,9 @@ const Sales = () => {
 
   return (
     <div className="h-screen flex flex-col items-start px-8 py-6 bg-gray-900">
-      <h1 className="text-3xl font-semibold text-gray-200 mb-6">Sales Report</h1>
+      <h1 className="text-3xl font-semibold text-gray-200 mb-6">
+        Sales Report
+      </h1>
       <div className="overflow-x-auto w-full bg-gray-800 shadow-md rounded-md">
         <table className="min-w-full bg-gray-900">
           <thead className="bg-gray-800">
@@ -126,11 +128,16 @@ const Sales = () => {
           </thead>
           <tbody>
             {salesData.map((sale) => (
-              <tr key={sale.id} className="border-b border-gray-700 hover:bg-gray-800">
+              <tr
+                key={sale.id}
+                className="border-b border-gray-700 hover:bg-gray-800"
+              >
                 <td className="py-3 px-4 text-gray-300">{sale.id}</td>
                 <td className="py-3 px-4 text-gray-300">{sale.name}</td>
                 <td className="py-3 px-4 text-gray-300">{sale.quantity}</td>
-                <td className="py-3 px-4 text-gray-300">${sale.price.toFixed(2)}</td>
+                <td className="py-3 px-4 text-gray-300">
+                  ₹{sale.price.toFixed(2)}
+                </td>
                 <td className="py-3 px-4 text-gray-300">
                   {new Date(sale.saleDate).toLocaleString()}
                 </td>
@@ -150,4 +157,3 @@ const Sales = () => {
 };
 
 export default Sales;
-  

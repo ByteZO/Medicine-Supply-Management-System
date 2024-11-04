@@ -67,7 +67,7 @@ const Inventory = () => {
         },
       ];
       // await axios.post(API_URL, mockMedicines);q
-      <q></q>
+      <q></q>;
       setMedicines(mockMedicines);
       applyFilters(mockMedicines, searchQuery);
     } catch (error) {
@@ -198,7 +198,7 @@ const Inventory = () => {
                 <td className="py-3 px-4 text-gray-300">{medicine.dosage}</td>
                 <td className="py-3 px-4 text-gray-300">{medicine.quantity}</td>
                 <td className="py-3 px-4 text-gray-300">
-                  ${medicine.price.toFixed(2)}
+                  ₹{medicine.price.toFixed(2)}
                 </td>
                 <td className="py-3 px-4 text-gray-300">
                   {medicine.discount}%
