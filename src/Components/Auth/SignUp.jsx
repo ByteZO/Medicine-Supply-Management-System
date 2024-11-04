@@ -4,15 +4,35 @@ import "../../App.css"; // Ensure you have your styles imported
 
 function SignUp() {
   const navigate = useNavigate();
-  const [isVisible, setIsVisible] = useState(false); // State for controlling fade-in
+  const [isVisible, setIsVisible] = useState(false);
+
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 25);
 
-    return () => clearTimeout(timer); // Cleanup on unmount
+    return () => clearTimeout(timer);
   }, []);
+
+  const submitHandler = () => {
+    if (
+      userName === "jeet" &&
+      email === "jeet@gmail.com" &&
+      password === "1234"
+    ) {
+      navigate("/Client-Chat");
+    } else if (
+      userName === "Narayan" &&
+      email === "Narayan@gmail.com" &&
+      password === "1234"
+    ) {
+      navigate("/admin/home");
+    }
+  };
 
   return (
     <>
@@ -48,6 +68,7 @@ function SignUp() {
                 id="username"
                 type="text"
                 placeholder="Choose a username"
+                onChange={(e) => setUserName(e.target.value)}
               />
             </div>
 
@@ -63,6 +84,7 @@ function SignUp() {
                 id="email"
                 type="email"
                 placeholder="Enter your email"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -78,12 +100,14 @@ function SignUp() {
                 id="password"
                 type="password"
                 placeholder="Create a password"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
             <button
               className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline transition duration-300 transform hover:translate-y-1"
               type="button"
+              onClick={submitHandler}
             >
               Sign Up
             </button>
