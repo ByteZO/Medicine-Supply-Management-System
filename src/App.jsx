@@ -28,7 +28,7 @@ function App() {
           <Route path="inventory" element={<Inventory />} />
           <Route path="trending" element={<Trending />} />
           <Route path="sales" element={<Sales />} />
-        </Route>
+        </Route>clear
       </>
     )
   );

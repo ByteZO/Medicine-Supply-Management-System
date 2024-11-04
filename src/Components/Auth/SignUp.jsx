@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import '../../App.css'; // Ensure you have your styles imported
+import "../../App.css"; // Ensure you have your styles imported
 
 function SignUp() {
   const navigate = useNavigate();
@@ -8,8 +8,8 @@ function SignUp() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsVisible(true); // Set to true after a delay
-    }, 25); // Delay in milliseconds before fade-in starts
+      setIsVisible(true);
+    }, 25);
 
     return () => clearTimeout(timer); // Cleanup on unmount
   }, []);
