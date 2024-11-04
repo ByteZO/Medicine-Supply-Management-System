@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import '../../App.css'; // Ensure you have your styles imported
+import "../../App.css"; // Ensure you have your styles imported
 
 function Login() {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false); // State for controlling fade-in
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsVisible(true); // Set to true after a delay
-    }, 25); // Delay in milliseconds before fade-in starts
+      setIsVisible(true);
+    }, 25);
 
-    return () => clearTimeout(timer); // Cleanup on unmount
+    return () => clearTimeout(timer);
   }, []);
+
+  const loginHandler = () => {
+    if (userName === "Narayan" && password === "1234") {
+      navigate("/admin/home");
+    } else if (userName === "Jeet" && password === "1234") {
+      navigate("/Client-Chat");
+    }
+  };
 
   return (
     <>
@@ -48,6 +58,7 @@ function Login() {
                 id="username"
                 type="text"
                 placeholder="Enter your username"
+                onChange={(e) => setUserName(e.target.value)}
               />
             </div>
 
@@ -63,13 +74,14 @@ function Login() {
                 id="password"
                 type="password"
                 placeholder="Enter your password"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
             <button
               className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline transition duration-300 transform hover:translate-y-1"
               type="button"
-              onClick={() => navigate("/admin/home")}
+              onClick={loginHandler}
             >
               Login
             </button>

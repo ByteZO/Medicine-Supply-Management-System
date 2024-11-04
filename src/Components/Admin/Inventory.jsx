@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 const API_URL =
   import.meta.env.BACKEND_API_URL || "http://localhost:8080/api/medicines";
 
@@ -10,66 +11,18 @@ const Inventory = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredMedicines, setFilteredMedicines] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedMedicine, setSelectedMedicine] = useState(null);
+  const [quantity, setQuantity] = useState("");
+  const [successMessage, setSuccessMessage] = useState(false);
 
   // Function to fetch medicines
   const fetchMedicines = async () => {
     try {
-      const mockMedicines = [
-        {
-          id: "1",
-          name: "Paracetamol",
-          manufacturer: "ABC Pharmaceuticals",
-          dosage: "500mg",
-          quantity: 100,
-          price: 1.5,
-          discount: 5,
-          expiryDate: "2025-01-15",
-        },
-        {
-          id: "2",
-          name: "Ibuprofen",
-          manufacturer: "XYZ Pharma",
-          dosage: "200mg",
-          quantity: 200,
-          price: 0.75,
-          discount: 10,
-          expiryDate: "2024-08-10",
-        },
-        {
-          id: "3",
-          name: "Aspirin",
-          manufacturer: "HealthCorp",
-          dosage: "300mg",
-          quantity: 50,
-          price: 0.65,
-          discount: 0,
-          expiryDate: "2025-07-22",
-        },
-        {
-          id: "4",
-          name: "Amoxicillin",
-          manufacturer: "MediQuick",
-          dosage: "250mg",
-          quantity: 150,
-          price: 2.25,
-          discount: 15,
-          expiryDate: "2023-11-05",
-        },
-        {
-          id: "5",
-          name: "Ciprofloxacin",
-          manufacturer: "Wellness Labs",
-          dosage: "500mg",
-          quantity: 120,
-          price: 1.8,
-          discount: 20,
-          expiryDate: "2024-12-31",
-        },
-      ];
-      // await axios.post(API_URL, mockMedicines);q
-      <q></q>;
-      setMedicines(mockMedicines);
-      applyFilters(mockMedicines, searchQuery);
+      const response = await axios.get(API_URL);
+
+      setMedicines(response.data);
+
+      applyFilters(response.data, searchQuery);
     } catch (error) {
       setMedicines([]);
       setFilteredMedicines([]);
@@ -110,107 +63,206 @@ const Inventory = () => {
 
   // Search handler triggered by Search button
   const handleSearch = async () => {
-    setSearchQuery(searchTerm); // Update search query only when Search button is clicked
+    setSearchQuery(searchTerm);
     applyFilters(medicines, searchTerm);
-    // await axios.post(API_URL, searchQuery); // Make API call with search query
   };
 
   // Clear (Cross) button handler
   const handleClear = () => {
     setSearchTerm("");
-    setSearchQuery(""); // Reset search query when Clear is clicked
+    setSearchQuery("");
     applyFilters(medicines, "");
+  };
+
+  // Checkout button handler
+  const handleCheckout = (medicine) => {
+    setSelectedMedicine(medicine);
+    setQuantity("");
+  };
+
+  // Confirm sale handler
+  const handleConfirmSale = async () => {
+    const response = await axios.post(`${API_URL}/sell`, { medicines });
+    if (!quantity || quantity <= 0 || quantity > selectedMedicine.quantity) {
+      alert("Please enter a valid quantity.");
+      return;
+    }
+
+    // Simulate a sale processing (e.g., update backend or state)
+    setSuccessMessage(true);
+
+    setTimeout(() => {
+      setSelectedMedicine(null);
+      setSuccessMessage(false);
+      fetchMedicines(); // Refresh the inventory list
+    }, 1000);
+  };
+
+  // Close Checkout overlay
+  const handleCancelCheckout = () => {
+    setSelectedMedicine(null);
   };
 
   return (
     <div className="h-screen flex flex-col items-start px-8 py-6 bg-gray-900">
-      <div className="flex items-center justify-between w-full mb-6">
-        <h1 className="text-3xl font-semibold text-gray-200">Inventory</h1>
+      {/* Main content that will blur when checkout is active */}
+      <div className={`${selectedMedicine ? "blur-sm" : ""} w-full`}>
+        <div className="flex items-center justify-between w-full mb-6">
+          <h1 className="text-3xl font-semibold text-gray-200">Inventory</h1>
 
-        {/* Filter, Search Input, Search Button */}
-        <div className="flex items-center space-x-4">
-          <label className="text-gray-300 font-medium">Filter:</label>
-          <select
-            className="border border-gray-600 rounded px-3 py-1 bg-gray-800 text-gray-300 focus:outline-none focus:border-blue-600"
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-          >
-            <option value="All">All Medicines</option>
-            <option value="Expired">Expired Medicines</option>
-          </select>
+          {/* Filter, Search Input, Search Button */}
+          <div className="flex items-center space-x-4">
+            <label className="text-gray-300 font-medium">Filter:</label>
+            <select
+              className="border border-gray-600 rounded px-3 py-1 bg-gray-800 text-gray-300 focus:outline-none focus:border-blue-600"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+            >
+              <option value="All">All Medicines</option>
+              <option value="Expired">Expired Medicines</option>
+            </select>
 
-          {/* Search Input with Cross Button Inside */}
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search by name"
-              className="border border-gray-600 rounded px-3 py-1 bg-gray-800 text-gray-300 focus:outline-none focus:border-blue-600 pr-8"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            {/* Cross Button */}
-            {searchTerm && (
-              <button
-                onClick={handleClear}
-                className="absolute inset-y-0 right-2 text-gray-300 hover:text-red-500 focus:outline-none"
-              >
-                ✕
-              </button>
-            )}
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search by name"
+                className="border border-gray-600 rounded px-3 py-1 bg-gray-800 text-gray-300 focus:outline-none focus:border-blue-600 pr-8"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              {searchTerm && (
+                <button
+                  onClick={handleClear}
+                  className="absolute inset-y-0 right-2 text-gray-300 hover:text-red-500 focus:outline-none"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+
+            <button
+              onClick={handleSearch}
+              className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none"
+            >
+              Search
+            </button>
           </div>
+        </div>
 
-          {/* Search Button */}
-          <button
-            onClick={handleSearch}
-            className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none"
-          >
-            Search
-          </button>
+        <div className="w-full bg-gray-800 shadow-md rounded-md overflow-hidden">
+          <table className="min-w-full bg-gray-900">
+            <thead className="bg-gray-800">
+              <tr>
+                <th className="py-3 px-4 text-left text-gray-300">Name</th>
+                <th className="py-3 px-4 text-left text-gray-300">
+                  Manufacturer
+                </th>
+                <th className="py-3 px-4 text-left text-gray-300">Dosage</th>
+                <th className="py-3 px-4 text-left text-gray-300">Quantity</th>
+                <th className="py-3 px-4 text-left text-gray-300">Price</th>
+                <th className="py-3 px-4 text-left text-gray-300">Discount</th>
+                <th className="py-3 px-4 text-left text-gray-300">
+                  Expiry Date
+                </th>
+                <th className="py-3 px-4 text-left text-gray-300">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredMedicines.map((medicine) => (
+                <tr
+                  key={medicine.id}
+                  className="border-b border-gray-700 hover:bg-gray-800"
+                >
+                  <td className="py-3 px-4 text-gray-300">{medicine.name}</td>
+                  <td className="py-3 px-4 text-gray-300">
+                    {medicine.manufacturer}
+                  </td>
+                  <td className="py-3 px-4 text-gray-300">{medicine.dosage}</td>
+                  <td className="py-3 px-4 text-gray-300">
+                    {medicine.quantity}
+                  </td>
+                  <td className="py-3 px-4 text-gray-300">
+                    ₹{medicine.price.toFixed(2)}
+                  </td>
+                  <td className="py-3 px-4 text-gray-300">
+                    {medicine.discount}%
+                  </td>
+                  <td className="py-3 px-4 text-gray-300">
+                    {new Date(medicine.expiryDate).toLocaleDateString()}
+                  </td>
+                  <td className="py-3 px-4 text-gray-300">
+                    <button
+                      onClick={() => handleCheckout(medicine)}
+                      className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none"
+                    >
+                      Checkout
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
 
-      {/* Medicine Table */}
-      <div className="w-full bg-gray-800 shadow-md rounded-md overflow-hidden">
-        <table className="min-w-full bg-gray-900">
-          <thead className="bg-gray-800">
-            <tr>
-              <th className="py-3 px-4 text-left text-gray-300">Name</th>
-              <th className="py-3 px-4 text-left text-gray-300">
-                Manufacturer
-              </th>
-              <th className="py-3 px-4 text-left text-gray-300">Dosage</th>
-              <th className="py-3 px-4 text-left text-gray-300">Quantity</th>
-              <th className="py-3 px-4 text-left text-gray-300">Price</th>
-              <th className="py-3 px-4 text-left text-gray-300">Discount</th>
-              <th className="py-3 px-4 text-left text-gray-300">Expiry Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredMedicines.map((medicine) => (
-              <tr
-                key={medicine.id}
-                className="border-b border-gray-700 hover:bg-gray-800"
+      {/* Checkout Component */}
+      {selectedMedicine && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50">
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-sm w-full relative">
+            {/* Cross (Cancel) button */}
+            {!successMessage ? (
+              <button
+                onClick={handleCancelCheckout}
+                className="absolute top-3 right-3 text-gray-300 hover:text-red-500 text-xl focus:outline-none"
               >
-                <td className="py-3 px-4 text-gray-300">{medicine.name}</td>
-                <td className="py-3 px-4 text-gray-300">
-                  {medicine.manufacturer}
-                </td>
-                <td className="py-3 px-4 text-gray-300">{medicine.dosage}</td>
-                <td className="py-3 px-4 text-gray-300">{medicine.quantity}</td>
-                <td className="py-3 px-4 text-gray-300">
-                  ₹{medicine.price.toFixed(2)}
-                </td>
-                <td className="py-3 px-4 text-gray-300">
-                  {medicine.discount}%
-                </td>
-                <td className="py-3 px-4 text-gray-300">
-                  {new Date(medicine.expiryDate).toLocaleDateString()}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                ✕
+              </button>
+            ) : null}
+            {successMessage ? (
+              <div className="fixed inset-0 flex items-center justify-center z-50 ">
+                <div className="bg-blue-600 rounded-3xl shadow-lg p-8 w-full max-w-lg text-center">
+                  <h2 className="text-4xl font-bold text-gray-200 mb-4">
+                    Success!
+                  </h2>
+                  <FontAwesomeIcon
+                    icon={faCircleCheck}
+                    style={{
+                      color: "#46c34e",
+                      fontSize: "6rem",
+                      paddingBlock: "12px",
+                    }}
+                  />
+                  <p className="text-2xl font-medium mb-3 mt-3 text-gray-200">
+                    Medicine Sold successfully.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <>
+                <h2 className="text-xl font-semibold text-gray-200 mb-4">
+                  Checkout: {selectedMedicine.name}
+                </h2>
+                <p className="mb-2 text-gray-400">
+                  Available quantity: {selectedMedicine.quantity}
+                </p>
+                <input
+                  type="number"
+                  placeholder="Enter quantity"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                  className="w-full px-3 py-2 mb-4 text-gray-300 bg-gray-900 border border-gray-700 rounded focus:outline-none focus:border-blue-600"
+                />
+                <button
+                  onClick={handleConfirmSale}
+                  className="w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none"
+                >
+                  Confirm Sale
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
