@@ -1,10 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-import '../../App.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
+import "../../App.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 
-const API_URL = import.meta.env.BACKEND_API_URL || "http://localhost:8080/api/medicines";
+const API_URL =
+  import.meta.env.BACKEND_API_URL || "http://localhost:8080/api/medicines";
 
 function Auditing() {
   const [medicineData, setMedicineData] = useState({
@@ -34,7 +35,7 @@ function Auditing() {
       const response = await axios.post(API_URL, medicineData);
       console.log("Response:", response.data); // Log response from API
 
-      setIsSubmitted(true); // Show success card
+      setIsSubmitted(true); // Show sucess card
       setMedicineData({
         name: "",
         manufacturer: "",
@@ -60,13 +61,26 @@ function Auditing() {
         <div className="fixed inset-0 flex items-center justify-center z-50 ">
           <div className="bg-blue-600 rounded-3xl shadow-lg p-8 w-full max-w-lg text-center">
             <h2 className="text-4xl font-bold text-gray-200 mb-4">Success!</h2>
-            <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#46c34e", fontSize: '6rem', paddingBlock: '12px'}} />
-            <p className="text-2xl font-medium mb-3 mt-3 text-gray-200">Medicine added successfully.</p>
+            <FontAwesomeIcon
+              icon={faCircleCheck}
+              style={{
+                color: "#46c34e",
+                fontSize: "6rem",
+                paddingBlock: "12px",
+              }}
+            />
+            <p className="text-2xl font-medium mb-3 mt-3 text-gray-200">
+              Medicine added successfully.
+            </p>
           </div>
         </div>
       )}
 
-      <div className={`bg-gray-900  px-8 pt-6 pb-8 w-full max-w-6xl h-[75%] overflow-auto ${isSubmitted ? "blur-md" : ""}`}>
+      <div
+        className={`bg-gray-900  px-8 pt-6 pb-8 w-full max-w-6xl h-[75%] overflow-auto ${
+          isSubmitted ? "blur-md" : ""
+        }`}
+      >
         <h2 className="text-3xl font-semibold text-center text-gray-200 mb-6">
           Add Medicine for Auditing
         </h2>
@@ -137,13 +151,25 @@ function Auditing() {
           </button>
         </form>
       </div>
+      <script
+        src="https://kit.fontawesome.com/de78888db2.js"
+        crossorigin="anonymous"
+      ></script>
     </div>
   );
 }
 
 import PropTypes from "prop-types";
 
-function InputField({ label, name, value, onChange, type = "text", step ,className }) {
+function InputField({
+  label,
+  name,
+  value,
+  onChange,
+  type = "text",
+  step,
+  className,
+}) {
   return (
     <div className="mb-4">
       <label
@@ -151,7 +177,7 @@ function InputField({ label, name, value, onChange, type = "text", step ,classNa
         htmlFor={name}
       >
         {label}
-      </label>  
+      </label>
       <input
         type={type}
         step={step}
@@ -159,7 +185,9 @@ function InputField({ label, name, value, onChange, type = "text", step ,classNa
         name={name}
         value={value}
         onChange={onChange}
-        className={`shadow shadow-gray-500 appearance-none border rounded w-full py-2 px-3 text-gray-200 bg-gray-900 border-gray-400 ${className || ''}`}
+        className={`shadow shadow-gray-500 appearance-none border rounded w-full py-2 px-3 text-gray-200 bg-gray-900 border-gray-400 ${
+          className || ""
+        }`}
         required
       />
     </div>
@@ -172,7 +200,7 @@ InputField.propTypes = {
   onChange: PropTypes.func.isRequired,
   type: PropTypes.string,
   step: PropTypes.string,
-  className: PropTypes.string, 
+  className: PropTypes.string,
 };
 
 export default Auditing;

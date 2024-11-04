@@ -57,7 +57,7 @@ function Layout() {
         </div>
         <div className="relative group">
           <div
-            className="bg-blue-400 rounded-full w-12 h-12 flex items-center justify-center cursor-pointer hover:bg-blue-500 transition-all duration-300"
+            className="bg-gray-400 rounded-full w-12 h-12 flex items-center justify-center cursor-pointer hover:bg-blue-500 transition-all duration-300"
             title={userName}
           >
             <span className="text-xl font-semibold">
@@ -70,7 +70,7 @@ function Layout() {
           </div>
         </div>
       </nav>
-      <div className=" bg-gray-100 max-h-screen">
+      <div className=" bg-gray-900 max-h-screen">
         <Outlet />
       </div>
     </>
