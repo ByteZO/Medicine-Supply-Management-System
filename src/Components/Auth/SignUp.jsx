@@ -15,7 +15,7 @@ function SignUp() {
       setIsVisible(true);
     }, 25);
 
-    return () => clearTimeout(timer); // Cleanup on unmount
+    return () => clearTimeout(timer);
   }, []);
 
   const submitHandler = () => {
