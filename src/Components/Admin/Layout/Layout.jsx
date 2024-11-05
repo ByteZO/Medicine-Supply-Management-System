@@ -13,7 +13,6 @@ function Layout() {
     }
   }, []);
 
-
   return (
     <>
       <nav className="bg-gradient-to-r from-blue-500 to-blue-700 text-white h-20 shadow-lg px-10 flex justify-between items-center">
@@ -55,7 +54,7 @@ function Layout() {
             Chat
           </Link>
         </div>
-        <div className="relative group">
+        <div className="relative group flex">
           <div
             className="bg-gray-400 rounded-full w-12 h-12 flex items-center justify-center cursor-pointer hover:bg-blue-500 transition-all duration-300"
             title={userName}
@@ -68,6 +67,16 @@ function Layout() {
           <div className="absolute top-14 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-sm rounded-md py-1 px-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg z-10">
             {userName}
           </div>
+          <button
+            onClick={() => {
+              localStorage.clear();
+
+              navigate("/login");
+            }}
+            className="bg-blue-600 text-white font-semibold   px-4  rounded  mx-3  hover:bg-blue-700 transition duration-300 transform hover:translate-y-1"
+          >
+            Logout
+          </button>
         </div>
       </nav>
       <div className=" bg-gray-900 max-h-screen">

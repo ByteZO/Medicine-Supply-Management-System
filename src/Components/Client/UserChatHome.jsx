@@ -81,8 +81,8 @@ const UserChatHome = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="h-screen bg-gray-900 overflow-y-auto">
-      {/* Conditionally Render Navbar */}
+<div className="h-screen bg-gray-900 overflow-y-auto">
+          {/* Conditionally Render Navbar */}
       {userName !== "admin" && (
         <nav className="bg-blue-500 shadow-md py-4 px-8 flex justify-between items-center transition-transform transform">
           <h1

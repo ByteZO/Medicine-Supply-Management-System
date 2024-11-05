@@ -56,18 +56,6 @@ function AdminHero() {
             Here’s what’s happening today:
           </p>
         </div>
-        <div className="flex space-x-4 animate-fade-in delay-2">
-          {/* Shortcut Buttons */}
-          {["Auditing", "Inventory", "Sales"].map((button) => (
-            <button
-              key={button}
-              className="bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-md shadow-md transition-transform transform hover:scale-105"
-              onClick={() => console.log(`Navigating to ${button}`)}
-            >
-              {button}
-            </button>
-          ))}
-        </div>
       </div>
 
       <div className="flex">
@@ -76,7 +64,7 @@ function AdminHero() {
           {[
             { title: "Total Medicines", value: "245" },
             { title: "Medicines Expiring Soon", value: "12" },
-            { title: "Sales This Month", value: "$5,250" },
+            { title: "Sales This Month", value: "₹5,250" },
           ].map((stat, index) => (
             <div
               key={index}

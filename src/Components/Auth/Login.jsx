@@ -18,16 +18,15 @@ function Login() {
 
   const loginHandler = () => {
     if (
-      (userName === "user1" || userName === "user2")&&
-      (email === "user1@email.com" || email === "user2@email.com") &&
+      (userName === "user1" || userName === "user2") &&
       (password === "testuser1" || password === "testuser2")
     ) {
+      localStorage.setItem("userName", userName);
+      localStorage.setItem("role", "user");
       navigate("/chat");
-    } else if (
-      userName === "admin" &&
-      email === "admin@email.com" &&
-      password === "1234"
-    ) {
+    } else if (userName === "admin" && password === "1234") {
+      localStorage.setItem("userName", userName);
+      localStorage.setItem("role", "admin");
       navigate("/admin/home");
     }
   };
