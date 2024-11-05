@@ -20,19 +20,30 @@ function SignUp() {
 
   const submitHandler = () => {
     if (
-      userName === "jeet" &&
-      email === "jeet@gmail.com" &&
-      password === "1234"
+      (userName === "user1" || userName === "user2") &&
+      (email === "user1@email.com" || email === "user2@email.com") &&
+      (password === "testuser1" || password === "testuser2")
     ) {
-      navigate("/Client-Chat");
+      // Save user details in local storage
+      localStorage.setItem("userName", userName);
+      localStorage.setItem("email", email);
+      localStorage.setItem("role", "user");
+  
+      navigate("/chat");
     } else if (
-      userName === "Narayan" &&
-      email === "Narayan@gmail.com" &&
+      userName === "admin" &&
+      email === "admin@email.com" &&
       password === "1234"
     ) {
+      // Save admin details in local storage
+      localStorage.setItem("userName", userName);
+      localStorage.setItem("email", email);
+      localStorage.setItem("role", "admin");
+  
       navigate("/admin/home");
     }
   };
+  
 
   return (
     <>
