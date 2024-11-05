@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/medicines";
+const API_URL = import.meta.env.BACKEND_API_URL || "http://localhost:8080/api/medicines";
 
 // Predefined data arrays
 const names = ["Paracetamol", "Ibuprofen", "Aspirin", "Amoxicillin", "Ciprofloxacin", "Metformin", "Omeprazole", "Lisinopril", "Simvastatin", "Albuterol"];
