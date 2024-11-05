@@ -17,10 +17,18 @@ function Login() {
   }, []);
 
   const loginHandler = () => {
-    if (userName === "Narayan" && password === "1234") {
+    if (
+      (userName === "user1" || userName === "user2")&&
+      (email === "user1@email.com" || email === "user2@email.com") &&
+      (password === "testuser1" || password === "testuser2")
+    ) {
+      navigate("/chat");
+    } else if (
+      userName === "admin" &&
+      email === "admin@email.com" &&
+      password === "1234"
+    ) {
       navigate("/admin/home");
-    } else if (userName === "Jeet" && password === "1234") {
-      navigate("/Client-Chat");
     }
   };
 

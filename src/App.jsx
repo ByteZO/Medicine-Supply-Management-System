@@ -24,8 +24,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/Client-Chat" element={<UserChatHome />} />
+        <Route path="chat" element={<UserChatHome />} />
         <Route path="/admin" element={<Layout />}>
+          <Route path="chat" element={<UserChatHome />} />
           <Route path="home" element={<AdminHero />} />
           <Route path="auditing" element={<Auditing />} />
           <Route path="inventory" element={<Inventory />}>
