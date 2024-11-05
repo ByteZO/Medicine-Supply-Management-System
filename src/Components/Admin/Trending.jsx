@@ -1,4 +1,8 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+const API_URL =
+  import.meta.env.BACKEND_TRENDING_API_URL ||
+  "http://localhost:8080/api/trending-medicines";
 
 const Trending = () => {
   const [trendingMedicines, setTrendingMedicines] = useState([]);
@@ -7,49 +11,10 @@ const Trending = () => {
   useEffect(() => {
     const fetchTrendingMedicines = async () => {
       try {
-        const fakeData =[
-          {
-              "createdDate": "2024-11-03T14:23:07",
-              "lastModifiedDate": "2024-11-03T15:07:27",
-              "id": 1,
-              "name": "aspirin",
-              "quantity": 21,
-              "date": "2024-11-03"
-          },
-          {
-              "createdDate": "2024-11-03T14:24:09",
-              "lastModifiedDate": "2024-11-03T15:07:12",
-              "id": 2,
-              "name": "para",
-              "quantity": 20,
-              "date": "2024-11-03"
-          },
-          {
-              "createdDate": "2024-11-03T15:07:22",
-              "lastModifiedDate": "2024-11-03T15:07:22",
-              "id": 3,
-              "name": "aaspirn",
-              "quantity": 10,
-              "date": "2024-11-03"
-          },
-          {
-              "createdDate": "2024-11-03T15:07:31",
-              "lastModifiedDate": "2024-11-03T15:07:31",
-              "id": 4,
-              "name": "jamal ghota",
-              "quantity": 10,
-              "date": "2024-11-03"
-          },
-          {
-              "createdDate": "2024-11-03T15:11:37",
-              "lastModifiedDate": "2024-11-03T15:15:49",
-              "id": 5,
-              "name": "aa",
-              "quantity": 30,
-              "date": "2024-11-03"
-          }
-      ]
-        setTrendingMedicines(fakeData);
+        const response = await axios.get(API_URL);
+        console.log("Trending Medicines:", response.data);
+
+        setTrendingMedicines(response.data);
       } catch (error) {
         setError("Failed to load trending medicines. Please try again later.");
         console.error("Error fetching trending medicines:", error);
@@ -66,7 +31,7 @@ const Trending = () => {
     borderRadius: "10px",
     border: "1px solid rgba(255, 255, 255, 0.18)",
   };
-  
+
   return (
     <div className="min-h-screen flex flex-col items-center px-8 py-6 bg-gray-900">
       <h1 className="text-3xl font-semibold text-gray-200 mb-6">
@@ -88,13 +53,16 @@ const Trending = () => {
                 {medicine.name.toUpperCase()}
               </h2>
               <p className="text-gray-700 text-md mb-1">
-                <span className="font-semibold text-blue-200">Quantity:</span> <span className="text-white">{medicine.quantity}</span>
+                <span className="font-semibold text-blue-200">Quantity:</span>{" "}
+                <span className="text-white">{medicine.quantity}</span>
               </p>
               <p className="text-gray-700 text-md mb-1">
-                <span className="font-semibold text-blue-200">Date:</span> <span className="text-white">{medicine.date}</span>
+                <span className="font-semibold text-blue-200">Date:</span>{" "}
+                <span className="text-white">{medicine.date}</span>
               </p>
               <p className="text-gray-700 text-md mb-1">
-                <span className="font-semibold text-blue-200">Created:</span> <span className="text-white">{medicine.createdDate}</span>
+                <span className="font-semibold text-blue-200">Created:</span>{" "}
+                <span className="text-white">{medicine.createdDate}</span>
               </p>
             </div>
           </div>

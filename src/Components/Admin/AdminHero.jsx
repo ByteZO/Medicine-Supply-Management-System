@@ -12,8 +12,15 @@ import {
   Legend,
 } from "chart.js";
 
-
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 function AdminHero() {
   const data = {
@@ -42,7 +49,9 @@ function AdminHero() {
       {/* Welcome Section */}
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-4xl font-bold animate-fade-in">Welcome back, Admin!</h1>
+          <h1 className="text-4xl font-bold animate-fade-in">
+            Welcome back, Admin!
+          </h1>
           <p className="mt-2 text-lg text-gray-400 animate-fade-in delay-1">
             Here’s what’s happening today:
           </p>
@@ -74,14 +83,18 @@ function AdminHero() {
               className="bg-gray-200 text-gray-900 p-6 rounded-lg shadow-md transition-transform transform hover:scale-105"
             >
               <h3 className="text-xl font-bold">{stat.title}</h3>
-              <p className="text-3xl font-semibold mt-2 animate-fade-in">{stat.value}</p>
+              <p className="text-3xl font-semibold mt-2 animate-fade-in">
+                {stat.value}
+              </p>
             </div>
           ))}
         </div>
 
         {/* Graph section */}
         <div className="bg-gray-200 rounded-lg shadow-md p-6 mt-0 h-[30rem] w-[50rem] m-auto">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">Monthly Sales Overview</h3>
+          <h3 className="text-xl font-bold text-gray-900 mb-4">
+            Monthly Sales Overview
+          </h3>
           <Line data={data} options={options} />
         </div>
       </div>
