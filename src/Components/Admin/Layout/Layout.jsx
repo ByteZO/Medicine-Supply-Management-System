@@ -4,7 +4,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 
 function Layout() {
   const navigate = useNavigate();
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState("Narayan");
 
   useEffect(() => {
     const storedUserName = localStorage.getItem("userName");
@@ -12,6 +12,7 @@ function Layout() {
       setUserName(storedUserName);
     }
   }, []);
+
 
   return (
     <>

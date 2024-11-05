@@ -1,67 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 
-// Sample sales data
-const salesData = [
-  {
-    id: 1,
-    name: "Aspirin",
-    quantity: 50,
-    price: 5.99,
-    saleDate: "2024-10-01T10:00:00",
-  },
-  {
-    id: 2,
-    name: "Ibuprofen",
-    quantity: 30,
-    price: 8.49,
-    saleDate: "2024-10-05T14:30:00",
-  },
-  {
-    id: 3,
-    name: "Paracetamol",
-    quantity: 20,
-    price: 3.99,
-    saleDate: "2024-10-10T09:45:00",
-  },
-  {
-    id: 4,
-    name: "Amoxicillin",
-    quantity: 40,
-    price: 15.5,
-    saleDate: "2024-10-12T16:15:00",
-  },
-  {
-    id: 5,
-    name: "Cough Syrup",
-    quantity: 25,
-    price: 7.25,
-    saleDate: "2024-10-18T11:00:00",
-  },
-  {
-    id: 6,
-    name: "Vitamin D",
-    quantity: 15,
-    price: 12.99,
-    saleDate: "2024-10-20T13:20:00",
-  },
-  {
-    id: 7,
-    name: "Antacid",
-    quantity: 10,
-    price: 6.5,
-    saleDate: "2024-10-22T15:45:00",
-  },
-  {
-    id: 8,
-    name: "Cough Lozenges",
-    quantity: 35,
-    price: 4.25,
-    saleDate: "2024-10-24T18:30:00",
-  },
-];
-
 const Sales = () => {
+  const sampleSalesData = [
+    {
+      createdDate: "2024-11-05T00:11:49",
+      lastModifiedDate: "2024-11-05T00:11:49",
+      id: 1,
+      medicine: {
+        createdDate: "2024-10-26T17:46:32",
+        lastModifiedDate: "2024-11-05T00:11:50",
+        id: 1,
+        name: "Aspirin",
+        manufacturer: "Pharma Co",
+        genericName: "Acetylsalicylic Acid",
+        dosage: "500mg",
+        quantity: 91,
+        price: 5.99,
+        discount: 10.0,
+        expiryDate: "2025-06-01",
+      },
+      quantity: 5,
+      totalPrice: 50.0,
+      saleDate: "2024-11-05",
+    },
+  ];
+
+  const [salesData, setSalesData] = useState([]);
+
+  useEffect(() => {
+    salesRecordHandler();
+  }, []);
+
+  const salesRecordHandler = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/sales");
+      const data = await response.json();
+      setSalesData(data);
+    } catch (error) {
+      console.error(error);
+      setSalesData(sampleSalesData);
+    }
+  };
+
   const handleDownload = () => {
     const doc = new jsPDF();
 
@@ -71,17 +52,32 @@ const Sales = () => {
 
     // Set up table headers
     doc.setFontSize(12);
-    const headers = ["ID", "Medicine", "Quantity", "Price", "Sale Date"];
-    const data = salesData.map((sale) => [
-      String(sale.id), // Ensure ID is a string
-      sale.name,
-      String(sale.quantity), // Ensure quantity is a string
-      `$${sale.price.toFixed(2)}`,
-      new Date(sale.saleDate).toLocaleString(),
-    ]);
+    const headers = [
+      "ID",
+      "Medicine",
+      "Quantity",
+      "Price",
+      "Total Price",
+      "Sale Date",
+      "Sale Time",
+    ];
+    const data = salesData.map((sale) => {
+      const saleDate = new Date(sale.saleDate);
+      const dateStr = saleDate.toLocaleDateString();
+      const timeStr = saleDate.toLocaleTimeString();
+      return [
+        String(sale.id),
+        sale.medicine.name,
+        String(sale.quantity),
+        `${sale.medicine.price.toFixed(2)}`,
+        `${sale.totalPrice.toFixed(2)}`,
+        dateStr,
+        timeStr,
+      ];
+    });
 
     // Add headers to PDF
-    const colWidths = [20, 50, 30, 30, 50]; // Adjust widths for better spacing
+    const colWidths = [10, 40, 20, 20, 30, 30, 30];
     let x = 20;
     let y = 40; // Starting Y position for data
 
@@ -106,8 +102,14 @@ const Sales = () => {
       y += 10; // Space between rows
     });
 
-    // Save the PDF
-    doc.save("sales_report.pdf");
+    // Save the PDF with the format "Sales-Report {dd-mm-yy}"
+    const today = new Date();
+    const dateStr = `${today.getDate().toString().padStart(2, "0")}-${(
+      today.getMonth() + 1
+    )
+      .toString()
+      .padStart(2, "0")}-${today.getFullYear().toString().slice(-2)}`;
+    doc.save(`Sales-Report ${dateStr}.pdf`);
   };
 
   return (
@@ -123,26 +125,37 @@ const Sales = () => {
               <th className="py-3 px-4 text-left text-gray-300">Medicine</th>
               <th className="py-3 px-4 text-left text-gray-300">Quantity</th>
               <th className="py-3 px-4 text-left text-gray-300">Price</th>
+              <th className="py-3 px-4 text-left text-gray-300">Total Price</th>
               <th className="py-3 px-4 text-left text-gray-300">Sale Date</th>
+              <th className="py-3 px-4 text-left text-gray-300">Sale Time</th>
             </tr>
           </thead>
           <tbody>
-            {salesData.map((sale) => (
-              <tr
-                key={sale.id}
-                className="border-b border-gray-700 hover:bg-gray-800"
-              >
-                <td className="py-3 px-4 text-gray-300">{sale.id}</td>
-                <td className="py-3 px-4 text-gray-300">{sale.name}</td>
-                <td className="py-3 px-4 text-gray-300">{sale.quantity}</td>
-                <td className="py-3 px-4 text-gray-300">
-                  ₹{sale.price.toFixed(2)}
-                </td>
-                <td className="py-3 px-4 text-gray-300">
-                  {new Date(sale.saleDate).toLocaleString()}
-                </td>
-              </tr>
-            ))}
+            {salesData.map((sale) => {
+              const saleDate = new Date(sale.saleDate);
+              const dateStr = saleDate.toLocaleDateString();
+              const timeStr = saleDate.toLocaleTimeString();
+              return (
+                <tr
+                  key={sale.id}
+                  className="border-b border-gray-700 hover:bg-gray-800"
+                >
+                  <td className="py-3 px-4 text-gray-300">{sale.id}</td>
+                  <td className="py-3 px-4 text-gray-300">
+                    {sale.medicine.name}
+                  </td>
+                  <td className="py-3 px-4 text-gray-300">{sale.quantity}</td>
+                  <td className="py-3 px-4 text-gray-300">
+                    ₹{sale.medicine.price.toFixed(2)}
+                  </td>
+                  <td className="py-3 px-4 text-gray-300">
+                    ₹{sale.totalPrice.toFixed(2)}
+                  </td>
+                  <td className="py-3 px-4 text-gray-300">{dateStr}</td>
+                  <td className="py-3 px-4 text-gray-300">{timeStr}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
