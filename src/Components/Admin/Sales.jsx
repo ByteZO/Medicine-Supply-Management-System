@@ -114,8 +114,8 @@ const Sales = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col items-start px-8 py-6 bg-gray-900">
-      <h1 className="text-3xl font-semibold text-white mb-6">Sales Report</h1>
+    <div className="min-h-screen flex flex-col items-start px-8 py-6 bg-gray-900">
+      <h1 className="text-3xl font-bold text-white mb-6">Sales Report</h1>
       <div className="w-full bg-gray-800 shadow-md rounded-md overflow-hidden">
         <table className="min-w-full bg-gray-900">
           <thead className="bg-gray-700">
