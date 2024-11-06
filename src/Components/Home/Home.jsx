@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../../App.css';
-import bg from '../../assets/download.jpeg';
+import GlowingWelcomeTitle from "./GlowingWelcomeTitle";
+// import bg from '../../assets/download.jpeg';
 
 function Home() {
   const navigate = useNavigate();
@@ -16,9 +17,10 @@ function Home() {
   }, []);
 
   return (
-    <div className="bg-gradient-to-r from-blue-400 to-blue-600 min-h-screen flex flex-col justify-between">
-      <nav className="bg-white shadow-lg py-4 px-8 flex justify-between items-center rounded-b-lg transition-transform transform">
-        <h1 className="text-3xl font-extrabold text-blue-600">MedManage</h1>
+    <div className="bg-gradient-to-t from-gray-900 to-gray-800 min-h-screen flex flex-col justify-between">
+    {/* <div className="bg-gray-900 min-h-screen flex flex-col justify-between"> */}
+      <nav className="bg-white shadow-lg py-3 px-8 flex justify-between items-center  transition-transform transform">
+        <h1 className="text-3xl font-extrabold text-gray-700">MedManage</h1>
 
         <div className="space-x-4">
           <button
@@ -37,25 +39,15 @@ function Home() {
       </nav>
 
       <div className="text-center mt-24">
-        <h2
-          className={`text-5xl font-bold text-white transition-opacity duration-1000 ease-in ${
-            isVisible ? "opacity-100 slide-in" : "opacity-0"
-          } relative`}
-        >
-          <span className="block relative text-6xl text-shadow-lg">
-            Welcome to MedManage
-          </span>
-        </h2>
-        <p
-          className={`mt-4 text-white text-lg transition-opacity duration-1000 ease-in delay-200 ${
-            isVisible ? "opacity-100 slide-in" : "opacity-0"
-          }`}
-        >
+        <GlowingWelcomeTitle />
+        <p className={`mt-4 text-white font-sans font-semi-bold text-xl transition-opacity duration-1000 ease-in delay-200 ${
+          isVisible ? "opacity-100 slide-in" : "opacity-0"
+        }`}>
           Your one-stop solution for managing medical inventory with ease.
         </p>
       </div>
 
-      <footer className="text-center mt-12 mb-4 text-white">
+      <footer className="text-center text-md mt-12 mb-4 text-white font-sans font-bold">
         <p>&copy; 2024 MedManage. All rights reserved.</p>
       </footer>
     </div>
