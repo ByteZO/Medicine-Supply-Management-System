@@ -45,7 +45,7 @@ function AdminHero() {
   };
 
   return (
-    <div className="p-8 bg-gray-800 text-white rounded-lg shadow-lg space-y-6">
+    <div className="p-8 bg-gray-800 min-h-screen text-white rounded-lg shadow-lg space-y-6">
       {/* Welcome Section */}
       <div className="flex justify-between items-center mb-8">
         <div>
