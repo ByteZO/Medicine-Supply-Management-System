@@ -117,7 +117,7 @@ const Inventory = () => {
     <div className="h-screen flex flex-col items-start px-8 py-6 bg-gray-900">
       <div className={`${selectedMedicine ? "blur-sm" : ""} w-full`}>
         <div className="flex items-center justify-between w-full mb-6">
-          <h1 className="text-3xl font-semibold text-gray-200">Inventory</h1>
+          <h1 className="text-3xl font-bold text-gray-200">Inventory</h1>
 
           {/* Filter, Search Input, Search Button */}
           <div className="flex items-center space-x-4">

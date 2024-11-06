@@ -56,7 +56,7 @@ function Auditing() {
   };
 
   return (
-    <div className={`bg-gray-900 h-[89vh] flex items-center justify-center `}>
+    <div className={`bg-gray-900 min-h-screen flex items-center justify-center `}>
       {isSubmitted && (
         <div className="fixed inset-0 flex items-center justify-center z-50 ">
           <div className="bg-blue-600 rounded-3xl shadow-lg p-8 w-full max-w-lg text-center">
@@ -77,11 +77,11 @@ function Auditing() {
       )}
 
       <div
-        className={`bg-gray-900  px-8 pt-6 pb-8 w-full max-w-6xl h-[75%] overflow-auto ${
+        className={`bg-gray-900  px-8 pb-18 w-full max-w-6xl h-[75%] overflow-auto ${
           isSubmitted ? "blur-md" : ""
         }`}
       >
-        <h2 className="text-3xl font-semibold text-center text-gray-200 mb-6">
+        <h2 className="text-3xl font-bold text-center text-gray-200 mb-6">
           Add Medicine for Auditing
         </h2>
 
@@ -173,7 +173,7 @@ function InputField({
   return (
     <div className="mb-4">
       <label
-        className="block text-gray-200 text-sm font-bold mb-2"
+        className="block text-gray-200 text-sm font-semibold mb-2"
         htmlFor={name}
       >
         {label}
@@ -185,7 +185,7 @@ function InputField({
         name={name}
         value={value}
         onChange={onChange}
-        className={`shadow shadow-gray-500 appearance-none border rounded w-full py-2 px-3 text-gray-200 bg-gray-900 border-gray-400 ${
+        className={`appearance-none border rounded w-full py-2 px-3 text-gray-200 bg-gray-900 border-gray-400 ${
           className || ""
         }`}
         required

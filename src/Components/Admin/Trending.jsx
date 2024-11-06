@@ -34,7 +34,7 @@ const Trending = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center px-8 py-6 bg-gray-900">
-      <h1 className="text-3xl font-semibold text-gray-200 mb-6">
+      <h1 className="text-3xl font-bold text-gray-200 mb-6">
         Trending Medicines
       </h1>
 

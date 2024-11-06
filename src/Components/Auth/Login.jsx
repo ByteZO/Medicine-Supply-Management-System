@@ -37,12 +37,12 @@ function Login() {
         <h1
           onClick={() => navigate("/admin/home")}
           style={{ cursor: "pointer" }}
-          className="text-2xl font-bold text-blue-600"
+          className="text-3xl font-extrabold text-gray-700"
         >
           MedManage
         </h1>
       </nav>
-      <div className="bg-gradient-to-r from-blue-400 to-blue-600 min-h-screen flex flex-col items-center justify-center">
+      <div className="bg-gradient-to-t from-gray-900 to-gray-800 min-h-screen flex flex-col items-center justify-center">
         <div
           className={`bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md transition-opacity duration-1000 ease-in ${
             isVisible ? "opacity-100" : "opacity-0"

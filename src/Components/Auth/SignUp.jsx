@@ -51,18 +51,18 @@ function SignUp() {
         <h1
           onClick={() => navigate("/")}
           style={{ cursor: "pointer" }}
-          className="text-2xl font-bold text-blue-600"
+          className="text-3xl font-extrabold text-gray-700"
         >
           MedManage
         </h1>
       </nav>
-      <div className="bg-gradient-to-r from-blue-400 to-blue-600 min-h-screen flex items-center justify-center">
+      <div className="bg-gradient-to-t from-gray-900 to-gray-800 min-h-screen flex items-center justify-center">
         <div
           className={`bg-white shadow-md rounded px-8 pt-6 pb-8 w-full max-w-md transition-opacity duration-1000 ease-in ${
             isVisible ? "opacity-100" : "opacity-0"
           } transform ${isVisible ? "translate-y-0" : "translate-y-10"}`}
         >
-          <h2 className="text-2xl font-semibold text-center text-blue-600 mb-6">
+          <h2 className="text-2xl font-bold text-center text-gray-600 mb-6">
             Create an Account
           </h2>
 
